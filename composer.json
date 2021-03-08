@@ -15,5 +15,9 @@
                 "Siterig\\Mailerlite\\ServiceProvider"
             ]
         }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "statamic/cms": "3.0.x-dev"
     }
 }
