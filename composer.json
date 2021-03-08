@@ -1,0 +1,19 @@
+{
+    "name": "siterig/mailerlite",
+    "autoload": {
+        "psr-4": {
+            "Siterig\\Mailerlite\\": "src"
+        }
+    },
+    "extra": {
+        "statamic": {
+            "name": "Mailerlite",
+            "description": "Mailerlite addon"
+        },
+        "laravel": {
+            "providers": [
+                "Siterig\\Mailerlite\\ServiceProvider"
+            ]
+        }
+    }
+}
