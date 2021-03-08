@@ -2,8 +2,11 @@
     "name": "siterig/mailerlite",
     "autoload": {
         "psr-4": {
-            "Siterig\\Mailerlite\\": "src"
-        }
+            "Siterig\\Mailerlite\\Tests\\": "tests"
+        },
+        "classmap": [
+            "tests/TestCase.php"
+        ]
     },
     "extra": {
         "statamic": {
