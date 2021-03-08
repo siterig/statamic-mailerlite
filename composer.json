@@ -21,6 +21,7 @@
     },
     "minimum-stability": "dev",
     "require": {
-        "statamic/cms": "3.0.x-dev"
+        "statamic/cms": "3.0.x-dev",
+        "mailerlite/mailerlite-api-v2-php-sdk": "dev-master"
     }
 }
