@@ -1,6 +1,1 @@
 /vendor
-/composer.lock
-/phpunit.xml
-/dist
-/mix-manifest.json
-/node_modules
