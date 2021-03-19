@@ -2,7 +2,7 @@
     "name": "siterig/mailerlite",
     "autoload": {
         "psr-4": {
-            "Siterig\\Mailerlite\\Tests\\": "tests"
+            "Siterig\\MailerLite\\Tests\\": "tests"
         },
         "classmap": [
             "tests/TestCase.php"
@@ -10,12 +10,12 @@
     },
     "extra": {
         "statamic": {
-            "name": "Mailerlite",
-            "description": "Mailerlite addon"
+            "name": "MailerLite",
+            "description": "MailerLite addon"
         },
         "laravel": {
             "providers": [
-                "Siterig\\Mailerlite\\ServiceProvider"
+                "SiteRig\\MailerLite\\ServiceProvider"
             ]
         }
     },

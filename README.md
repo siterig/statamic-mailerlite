@@ -4,15 +4,16 @@ MailerLite for Statamic lets you to subscribe contact form submissions to your M
 
 You can optionally add subscribers to groups, automatically split single name fields into name and last name, use an opt-in field, collect GDPR compliant marketing preferences and of course map any custom fields that you like. You can also map multiple form fields into a single field on MailerLite.
 
-This add-on was not created by MailerLite and support requests should be submitted [here](https://github.com/rockandscissor/MailerLite/issues) in GitHub issues or you can use the Get Support link.
+This is not an official add-on by MailerLite and as such support requests should be submitted [here](https://rockandscissor.atlassian.net/servicedesk/customer/portal/2) on our support centre.
 
 ## Documentation
 
-Read it on the [Statamic Marketplace](https://statamic.com/marketplace/addons/mailerlite/docs) or contribute to it [here on GitHub](DOCUMENTATION.md).
+Read it on the [Statamic Marketplace](https://statamic.com/addons/statamic/mailerlite/docs) or contribute to it [here on GitHub](DOCUMENTATION.md).
 
 ## Requirements
 
-* PHP 7.1 or higher (Recommend 7.3 or higher)
+* PHP 7.2.5 or higher
+* Laravel 7 or 8
 * Statamic v3
 
 ## Installation
@@ -25,4 +26,4 @@ Matt Stone, Craig Bowler, Jamie McGrory
 
 ## Contributing
 
-See our [contributing guide](https://github.com/rockandscissor/MailerLite/blob/master/CONTRIBUTING.md) for more information.
+See our [contributing guide](https://github.com/siterig/mailerlite/blob/master/CONTRIBUTING.md) for more information.
