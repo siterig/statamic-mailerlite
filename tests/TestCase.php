@@ -1,6 +1,6 @@
 <?php
 
-namespace Siterig\Mailerlite\Tests;
+namespace SiteRig\MailerLite\Tests;
 
 use Statamic\Facades\Entry;
 use Statamic\Facades\Collection;
