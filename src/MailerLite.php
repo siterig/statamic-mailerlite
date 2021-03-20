@@ -13,6 +13,13 @@ class MailerLite
 
     public function __construct()
     {
-        $this->mailerlite = new MailerLiteAPI(config('mailerlite.api_key'));
+        if ($api_key = config('mailerlite.api_key')) {
+            $this->mailerlite = new MailerLiteAPI($api_key);
+        }
+    }
+
+    public function connectMailerLite(string $endpoint, array $data = [])
+    {
+        return optional($this->mailerlite)->get();
     }
 }
