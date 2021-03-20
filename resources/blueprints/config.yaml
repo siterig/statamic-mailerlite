@@ -1,0 +1,90 @@
+mailerlite_api_key:
+  display: 'MailerLite API Key'
+  type: text
+  read_only: true
+forms:
+  display: 'Forms'
+  instructions: 'Add a row for each form you want to capture subscribers from'
+  type: grid
+  mode: stacked
+  add_row: 'Add Form'
+  fields:
+    -
+      handle: form
+      field:
+        display: 'Form'
+        instructions: 'Select the form you wish to use'
+        type: form
+        max_items: 1
+        mode: select
+        width: 50
+    -
+      handle: subscriber_group
+      field:
+        display: 'Subscriber Group'
+        instructions: 'Optional: Which group would you like subscribers to be added to?'
+        type: mailerlite_subscribergroup
+        mode: select
+        max_items: 1
+        width: 50
+    -
+      handle: name_field
+      field:
+        display: 'Name Field'
+        instructions: 'Defaults to `name`, if your form uses a different field name change it here'
+        type: tags
+        default: name
+        width: 50
+    -
+      handle: email_field
+      field:
+        display: 'Email Field'
+        instructions: 'Defaults to `email`, if your form uses a different field name change it here'
+        type: tags
+        default: email
+        width: 50
+    -
+      handle: auto_split_name
+      field:
+        display: 'Automatically Split Name'
+        instructions: 'Split into `name` and `last_name` on <a href="https://app.mailerlite.com" target="_blank">MailerLite</a>, this setting is ignored if you map `last_name` seperately'
+        type: toggle
+        default: true
+        width: 100
+    -
+      handle: marketing_optin_field
+      field:
+        display: 'Opt-in Field'
+        instructions: 'Optional: This field should be an un-ticked checkbox that conforms to regulations in your market (e.g. GDPR/ePrivacy)'
+        type: tags
+        width: 50
+        max_items: 1
+    -
+      handle: marketing_permissions_fields
+        type: tags
+        display: 'Marketing Permissions Field'
+        instructions: 'Optional: You will need to setup a `marketing_permissions` field on <a href="https://app.mailerlite.com" target="_blank">MailerLite</a>, for more info see <a href="https://help.mailerlite.com/article/show/88106-checkboxes-and-marketing-permissions" target="_blank">this article</a>'
+        width: 50
+    -
+      handle: mapped_fields
+      field:
+        mode: table
+        reorderable: true
+        display: 'Mapped Fields'
+        type: grid
+        icon: grid
+        add_row: 'Add Mapped Field'
+        fields:
+          -
+            handle: subscriber_field
+            field:
+              display: 'Subscriber Field'
+              type: mailerlite_subscriberfields
+              width: 50
+              max_items: 1
+          -
+            handle: mapped_form_fields
+            field:
+              display: 'Form Field(s)'
+              type: tags
+              width: 50
