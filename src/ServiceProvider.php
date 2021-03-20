@@ -2,10 +2,8 @@
 
 namespace SiteRig\MailerLite;
 
-use Illuminate\Support\Facades\Log;
 use MailerLiteApi\MailerLite as MailerLiteAPI;
 use Statamic\Events\SubmissionCreated;
-use Statamic\Facades\CP\Nav;
 use Statamic\Facades\Permission;
 use Statamic\Facades\User;
 use Statamic\Providers\AddonServiceProvider;
@@ -13,11 +11,18 @@ use Statamic\Support\Arr;
 
 class ServiceProvider extends AddonServiceProvider
 {
+    protected $commands = [
+        GetGroups::class,
+        GetMergeFields::class,
+    ];
+
+    protected $fieldtypes = [
+
+    ];
+
     protected $routes = [
         'cp' => __DIR__ . '/../routes/cp.php',
     ];
-
-    protected $config = false;
 
     public function boot()
     {
@@ -27,8 +32,7 @@ class ServiceProvider extends AddonServiceProvider
             ->bootAddonConfig()
             ->bootAddonViews()
             ->bootAddonTranslations()
-            ->bootAddonPermissions()
-            ->bootAddonNav();
+            ->bootAddonPermissions();
     }
 
     protected function bootAddonConfig()
@@ -66,23 +70,6 @@ class ServiceProvider extends AddonServiceProvider
             Permission::group('mailerlite', 'MailerLite', function () {
                 Permission::register('edit mailerlite settings')->label(__('mailerlite::messages.edit_mailerlite_settings'));
             });
-        });
-
-        return $this;
-    }
-
-    protected function bootAddonNav()
-    {
-        Nav::extend(function ($nav) {
-            if ($this->mailerlitePermissions()) {
-                $nav->tools('MailerLite')
-                    ->route('mailerlite.index')
-                    ->icon('settings-horizontal')
-                    ->active('mailerlite')
-                    ->children([
-                        $nav->item(__('mailerlite::messages.mailerlite_settings'))->route('mailerlite.mailerlite-settings.edit')->can('edit mailerlite settings'),
-                    ]);
-            }
         });
 
         return $this;
