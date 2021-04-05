@@ -1,12 +1,38 @@
 {
     "name": "siterig/mailerlite",
+    "license": "proprietary",
+    "type": "statamic-addon",
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "edalzell/forma": "^0.8",
+        "laravel/framework": "^7.0 || ^8.0",
+        "mailerlite/mailerlite-api-v2-php-sdk": "dev-master",
+        "statamic/cms": "^3.0"
+    },
+    "description": "Subscribe contact forms to MailerLite",
+    "authors": [
+        {
+            "name": "Matt Stone",
+            "email": "matt@rockandscissor.com",
+            "homepage": "https://rockandscissor.com",
+            "role": "Founder"
+        },
+        {
+            "name": "Craig Bowler",
+            "email": "craig@rockandscissor.com",
+            "homepage": "https://rockandscissor.com",
+            "role": "Founder"
+        }
+    ],
     "autoload": {
         "psr-4": {
-            "Siterig\\MailerLite\\Tests\\": "tests"
-        },
-        "classmap": [
-            "tests/TestCase.php"
-        ]
+            "SiteRig\\MailerLite\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SiteRig\\MailerLite\\Tests\\": "tests"
+        }
     },
     "extra": {
         "statamic": {
@@ -18,10 +44,5 @@
                 "SiteRig\\MailerLite\\ServiceProvider"
             ]
         }
-    },
-    "minimum-stability": "dev",
-    "require": {
-        "statamic/cms": "3.0.x-dev",
-        "mailerlite/mailerlite-api-v2-php-sdk": "dev-master"
     }
 }
