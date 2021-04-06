@@ -1,5 +1,6 @@
 api_key:
   display: 'MailerLite API Key'
+  instructions: 'Add your `MAILERLITE_API_KEY` value to your `.env` file'
   type: text
   read_only: true
 forms:
@@ -8,6 +9,8 @@ forms:
   type: grid
   mode: stacked
   add_row: 'Add Form'
+  if:
+    api_key: not empty
   fields:
     -
       handle: form
