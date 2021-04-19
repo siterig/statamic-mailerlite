@@ -12,7 +12,7 @@ Read it on the [Statamic Marketplace](https://statamic.com/addons/statamic/maile
 
 ## Requirements
 
-* PHP 7.2.5 or higher
+* PHP 7.4 or higher
 * Laravel 7 or 8
 * Statamic v3
 
