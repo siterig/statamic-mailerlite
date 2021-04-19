@@ -5,7 +5,7 @@ api_key:
   read_only: true
 forms:
   display: 'Forms'
-  instructions: 'Add a row for each form you want to capture subscribers details from'
+  instructions: 'Add a row for each form you want to capture subscribers details from. On fields marked _(Tags)_ or _(Tag)_ type your field name(s) and hit enter before saving this page'
   type: grid
   mode: stacked
   add_row: 'Add Form'
@@ -35,7 +35,7 @@ forms:
       handle: name_field
       field:
         display: 'Name Field'
-        instructions: 'Defaults to `name`, if your form uses a different field name change it here'
+        instructions: 'Defaults to `name`, if your form uses a different field name change it here. _(Tags)_'
         type: taggable
         default: name
         width: 50
@@ -43,7 +43,7 @@ forms:
       handle: email_field
       field:
         display: 'Email Field'
-        instructions: 'Defaults to `email`, if your form uses a different field name change it here'
+        instructions: 'Defaults to `email`, if your form uses a different field name change it here.  _(Tags)_'
         type: taggable
         default: email
         validate: required
@@ -60,7 +60,7 @@ forms:
       handle: marketing_optin_field
       field:
         display: 'Opt-in Field'
-        instructions: 'Should be an un-ticked checkbox that conforms to data protection regulations in your region'
+        instructions: 'Should be an un-ticked checkbox that conforms to data protection regulations in your region.  _(Tag)_'
         type: taggable
         width: 50
         max_items: 1
@@ -68,7 +68,7 @@ forms:
       handle: marketing_permissions_fields
       field:
         display: 'Marketing Permissions Field'
-        instructions: 'You will need to setup a `marketing_permissions` field on <a href="https://app.mailerlite.com" target="_blank">MailerLite</a>, for more info see <a href="https://help.mailerlite.com/article/show/88106-checkboxes-and-marketing-permissions" target="_blank">this article</a>'
+        instructions: 'You will need to setup a `marketing_permissions` field on <a href="https://app.mailerlite.com" target="_blank">MailerLite</a>, for more info see <a href="https://help.mailerlite.com/article/show/88106-checkboxes-and-marketing-permissions" target="_blank">this article</a> _(Tags)_'
         type: taggable
         width: 50
     -
@@ -94,6 +94,7 @@ forms:
             handle: mapped_form_fields
             field:
               display: 'Form Field(s)'
+              instructions: 'Enter your form field name(s) and hit enter to add a tag'
               type: taggable
               validate: required
               width: 50
