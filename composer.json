@@ -4,9 +4,9 @@
     "type": "statamic-addon",
     "require": {
         "php": "^7.4 || ^8.0",
-        "edalzell/forma": "^0.8",
+        "edalzell/forma": "^1.0",
         "laravel/framework": "^7.0 || ^8.0",
-        "mailerlite/mailerlite-api-v2-php-sdk": "dev-master",
+        "mailerlite/mailerlite-api-v2-php-sdk": "0.3.2",
         "statamic/cms": "^3.0"
     },
     "description": "Subscribe contact forms to MailerLite",
