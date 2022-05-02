@@ -13,7 +13,7 @@ Read it on the [Statamic Marketplace](https://statamic.com/addons/statamic/maile
 ## Requirements
 
 * PHP 7.4 or higher
-* Laravel 7, 8 or 9
+* Laravel 7, 8 or
 * Statamic v3
 
 ## Installation
@@ -24,6 +24,14 @@ Coming soon...
 
 Matt Stone, Craig Bowler, Jamie McGrory
 
+## Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+
 ## Contributing
 
-See our [contributing guide](https://github.com/siterig/mailerlite/blob/master/CONTRIBUTING.md) for more information.
+See our [contributing guide](CONTRIBUTING.md) for more information.
+
+## License
+
+This is commercial software. You may use the package for your sites. Each site requires it's own license.

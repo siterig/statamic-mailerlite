@@ -9,7 +9,7 @@
         "mailerlite/mailerlite-api-v2-php-sdk": "0.3.2",
         "statamic/cms": "^3.0"
     },
-    "description": "Subscribe contact forms to MailerLite",
+    "description": "Subscribe contact forms emails to MailerLite",
     "authors": [
         {
             "name": "Matt Stone",
@@ -35,6 +35,10 @@
         }
     },
     "extra": {
+        "download-dist": {
+            "url": "https://github.com/siterig/statamic-mailerlite/releases/download/{$version}/dist.tar.gz",
+            "path": "dist"
+        },
         "statamic": {
             "name": "MailerLite",
             "description": "MailerLite addon for Statamic"

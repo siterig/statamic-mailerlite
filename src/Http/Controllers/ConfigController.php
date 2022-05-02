@@ -9,11 +9,11 @@ class ConfigController extends BaseController
 {
     protected function postProcess(array $values): array
     {
-        $userConfig = Arr::get($values, 'user');
+        $formConfig = Arr::get($values, 'forms');
 
         return array_merge(
             $values,
-            ['user' => $userConfig[0]]
+            ['forms' => $formConfig[0]]
         );
     }
 
@@ -23,7 +23,7 @@ class ConfigController extends BaseController
 
         return array_merge(
             $config,
-            ['user' => [Arr::get($config, 'user', [])]]
+            ['forms' => [Arr::get($config, 'forms', [])]]
         );
     }
 }
