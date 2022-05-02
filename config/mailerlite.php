@@ -51,26 +51,22 @@ return [
             | Name Field
             |--------------------------------------------------------------------------
             |
-            | Defaults to use `name`. Change if a different field name is used.
+            | Optional: Select the form field to use for `name`.
             |
             */
 
-            'name_field' => [
-                'name',
-            ],
+            'name_field' => null,
 
             /*
             |--------------------------------------------------------------------------
             | Email Field
             |--------------------------------------------------------------------------
             |
-            | Defaults to use `email`. Change if a different field name is used.
+            | Select the form field to use for `name`.
             |
             */
 
-            'email_field' => [
-                'email',
-            ],
+            'email_field' => null,
 
             /*
             |--------------------------------------------------------------------------

@@ -2,10 +2,11 @@ api_key:
   display: 'MailerLite API Key'
   instructions: 'Add your `MAILERLITE_API_KEY` value to your `.env` file'
   type: text
+  default: api_key
   read_only: true
 forms:
   display: 'Forms'
-  instructions: 'Add a row for each form you want to capture subscribers details from'
+  instructions: 'Add a row for each form you want to capture subscribers details from.'
   type: grid
   mode: stacked
   add_row: 'Add Form'
@@ -31,23 +32,32 @@ forms:
         mode: select
         max_items: 1
         width: 50
+        if:
+          form: not empty
     -
       handle: name_field
       field:
         display: 'Name Field'
-        instructions: 'Defaults to `name`, if your form uses a different field name change it here'
-        type: taggable
-        default: name
+        instructions: 'Select the form field to use for `name`.'
+        type: form_fields
+        mode: select
+        max_items: 1
         width: 50
+        if:
+          form: not empty
     -
       handle: email_field
       field:
         display: 'Email Field'
-        instructions: 'Defaults to `email`, if your form uses a different field name change it here'
-        type: taggable
+        instructions: 'Select the form field to use for `email`.'
+        type: form_fields
+        mode: select
         default: email
         validate: required
+        max_items: 1
         width: 50
+        if:
+          form: not empty
     -
       handle: auto_split_name
       field:
@@ -56,21 +66,29 @@ forms:
         type: toggle
         default: true
         width: 100
+        if:
+          form: not empty
     -
       handle: marketing_optin_field
       field:
         display: 'Opt-in Field'
-        instructions: 'Should be an un-ticked checkbox that conforms to data protection regulations in your region'
-        type: taggable
-        width: 50
+        instructions: 'Should be an un-ticked checkbox that conforms to data protection regulations in your region.'
+        type: form_fields
+        mode: select
         max_items: 1
+        width: 50
+        if:
+          form: not empty
     -
       handle: marketing_permissions_fields
       field:
         display: 'Marketing Permissions Field'
-        instructions: 'You will need to setup a `marketing_permissions` field on <a href="https://app.mailerlite.com" target="_blank">MailerLite</a>, for more info see <a href="https://help.mailerlite.com/article/show/88106-checkboxes-and-marketing-permissions" target="_blank">this article</a>'
-        type: taggable
+        instructions: 'You will need to setup a `marketing_permissions` field on <a href="https://app.mailerlite.com" target="_blank">MailerLite</a>, for more info see <a href="https://help.mailerlite.com/article/show/88106-checkboxes-and-marketing-permissions" target="_blank">this article</a>.'
+        type: form_fields
+        mode: select
         width: 50
+        if:
+          form: not empty
     -
       handle: mapped_fields
       field:
@@ -87,13 +105,16 @@ forms:
               display: 'Subscriber Field'
               type: subscriber_field
               mode: select
-              validate: required
               width: 50
               max_items: 1
           -
             handle: mapped_form_fields
             field:
               display: 'Form Field(s)'
-              type: taggable
-              validate: required
+              instructions: 'Select your form field name'
+              type: form_fields
+              mode: select
+              max_items: 1
               width: 50
+        if:
+          form: not empty

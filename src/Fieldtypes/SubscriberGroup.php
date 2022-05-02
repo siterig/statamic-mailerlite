@@ -4,7 +4,6 @@ namespace SiteRig\MailerLite\Fieldtypes;
 
 use SiteRig\MailerLite\MailerLite;
 use Statamic\Fieldtypes\Relationship;
-use Statamic\Support\Arr;
 
 class SubscriberGroup extends Relationship
 {
@@ -24,6 +23,10 @@ class SubscriberGroup extends Relationship
 
     protected function toItemArray($id)
     {
-        return[];
+        if ($id && $subscriber_group = $this->mailerlite->getSubscriberGroups($id)) {
+            return $subscriber_group;
+        }
+
+        return [];
     }
 }
