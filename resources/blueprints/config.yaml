@@ -65,7 +65,7 @@ forms:
         instructions: 'Split into `name` and `last_name` on <a href="https://app.mailerlite.com" target="_blank">MailerLite</a>, this setting is ignored if you map `last_name` separately'
         type: toggle
         default: true
-        width: 100
+        width: 50
         if:
           form: not empty
     -
@@ -76,16 +76,6 @@ forms:
         type: form_fields
         mode: select
         max_items: 1
-        width: 50
-        if:
-          form: not empty
-    -
-      handle: marketing_permissions_fields
-      field:
-        display: 'Marketing Permissions Field'
-        instructions: 'You will need to setup a `marketing_permissions` field on <a href="https://app.mailerlite.com" target="_blank">MailerLite</a>, for more info see <a href="https://help.mailerlite.com/article/show/88106-checkboxes-and-marketing-permissions" target="_blank">this article</a>.'
-        type: form_fields
-        mode: select
         width: 50
         if:
           form: not empty

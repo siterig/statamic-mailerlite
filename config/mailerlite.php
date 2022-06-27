@@ -94,19 +94,6 @@ return [
 
             /*
             |--------------------------------------------------------------------------
-            | Marketing Permissions Field
-            |--------------------------------------------------------------------------
-            |
-            | Optional: To use this option you will need to setup a
-            | `marketing_permissions` field on MailerLite. For more information see
-            | https://help.mailerlite.com/article/show/88106-checkboxes-and-marketing-permissions
-            |
-            */
-
-            'marketing_permissions_fields' => null,
-
-            /*
-            |--------------------------------------------------------------------------
             | Mapped Fields
             |--------------------------------------------------------------------------
             |
