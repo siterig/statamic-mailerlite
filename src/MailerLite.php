@@ -42,11 +42,24 @@ class MailerLite
             // Get single group
             $group = $groups_api->find($group_id);
 
-            // Add group to array
-            $subscriber_groups = [
-                'id' => $group->id,
-                'title' => $group->name,
-            ];
+            // Check if there was an error getting this group by id
+            if ($group->error) {
+
+                // Add error message
+                $subscriber_groups = [
+                    'id' => $group_id,
+                    'title' => 'Error: group no longer exists',
+                ];
+
+            } else {
+
+                // Add group to array
+                $subscriber_groups = [
+                    'id' => $group->id,
+                    'title' => $group->name,
+                ];
+
+            }
 
         } else {
 
@@ -117,72 +130,77 @@ class MailerLite
      */
     public function addSubscriber(array $config, object $submission_data)
     {
-        // Set data email field
-        $this->subscriber_data['email'] = $submission_data->get($config['email_field']);
-        
-        if (!empty($config['name_field'])) { // Check if name_field is set
-            $this->doMapFields('name', $config['name_field'], $submission_data->toArray(), ' ');
-        }
+        // Check if marketing permissions were accepted (returns true if not in use)
+        if ($this->checkMarketingOptin($config, $submission_data)) {
 
-        // Check for mapped fields
-        if ($mapped_fields = Arr::get($config, 'mapped_fields')) {
+            // Set data email field
+            $this->subscriber_data['email'] = $submission_data->get($config['email_field']);
 
-            // Loop through mapped fields
-            collect($mapped_fields)->map(function ($item, $key) use ($submission_data) {
-                if (!empty($item["mapped_form_fields"])) { // In case there is no mapped form field
-                    // Check if mapped fields contain last_name
-                    if ($item['subscriber_field'] == 'last_name') {
-                        $this->last_name_field_exists = true;
-                    }
-                    $this->doMapFields($item['subscriber_field'], $item["mapped_form_fields"], $submission_data->toArray());
-                }
-            });
-
-        }
-
-        // Check if Automatic Name Split is configured
-        if (Arr::get($config, 'auto_split_name', true)) {
-            
-            // If there is no last_name field mapped
-            if ($this->last_name_field_exists === false) {
-                // Split name by first space character
-                $name_array = explode(' ', $this->subscriber_data['fields']['name'], 2);
-
-                // Set data
-                $this->subscriber_data['fields']['name'] = $name_array[0];
-                $this->subscriber_data['fields']['last_name'] = $name_array[1] ?? '';
+            if (!empty($config['name_field'])) { // Check if name_field is set
+                $this->doMapFields('name', $config['name_field'], $submission_data->toArray(), ' ');
             }
 
-        }
+            // Check for mapped fields
+            if ($mapped_fields = Arr::get($config, 'mapped_fields')) {
 
-        // Set options for api parameters
-        $subscriber_options = [
-            'resubscribe' => true
-        ];
-        
-        // Check if subscriber group was setup
-        if (isset($config['subscriber_group'])) {
+                // Loop through mapped fields
+                collect($mapped_fields)->map(function ($item, $key) use ($submission_data) {
+                    if (!empty($item["mapped_form_fields"])) { // In case there is no mapped form field
+                        // Check if mapped fields contain last_name
+                        if ($item['subscriber_field'] == 'last_name') {
+                            $this->last_name_field_exists = true;
+                        }
+                        $this->doMapFields($item['subscriber_field'], $item["mapped_form_fields"], $submission_data->toArray());
+                    }
+                });
 
-            // Use the MailerLite Groups API to add the subscriber to a group
-            $response = $this->mailerlite->groups()->addSubscriber($config['subscriber_group'], $this->subscriber_data, $subscriber_options);
+            }
 
-        } else {
+            // Check if Automatic Name Split is configured
+            if (Arr::get($config, 'auto_split_name', true)) {
 
-            // Use the MailerLite Subscriber API to add the subscriber
-            $response = $this->mailerlite->subscribers()->create($this->subscriber_data, $subscriber_options);
+                // If there is no last_name field mapped
+                if ($this->last_name_field_exists === false) {
+                    // Split name by first space character
+                    $name_array = explode(' ', $this->subscriber_data['fields']['name'], 2);
 
-        }
+                    // Set data
+                    $this->subscriber_data['fields']['name'] = $name_array[0];
+                    $this->subscriber_data['fields']['last_name'] = $name_array[1] ?? '';
+                }
 
-        // Check response for errors
-        if (property_exists($response, 'error')) {
+            }
 
-            // Generate error to the log
-            \Log::error("MailerLite - " . $response->error->message);
+            // Set options for api parameters
+            $subscriber_options = [
+                'resubscribe' => true
+            ];
 
-        } elseif (empty($response)) {
+            // Check if subscriber group was setup
+            if (isset($config['subscriber_group'])) {
 
-            // Generate error to the log
-            \Log::error("MailerLite - Bad Request");
+                // Use the MailerLite Groups API to add the subscriber to a group
+                $response = $this->mailerlite->groups()->addSubscriber($config['subscriber_group'], $this->subscriber_data, $subscriber_options);
+
+            } else {
+
+                // Use the MailerLite Subscriber API to add the subscriber
+                $response = $this->mailerlite->subscribers()->create($this->subscriber_data, $subscriber_options);
+
+            }
+
+            // Check response for errors
+            if (property_exists($response, 'error')) {
+
+                // Generate error to the log
+                \Log::error("MailerLite - " . $response->error->message);
+
+            } elseif (empty($response)) {
+
+                // Generate error to the log
+                \Log::error("MailerLite - Bad Request");
+
+            }
 
         }
 
@@ -193,20 +211,21 @@ class MailerLite
     }
 
     /**
-     * Are there any Marketing Permissions fields setup and have they been accepted?
+     * Are there any Marketing Opt-in fields setup and have they been accepted?
      *
      * @param $config array
      * @param $submission array
      *
      * @return bool
      */
-    private function checkMarketingPermissions(array $config, array $submission)
+    private function checkMarketingOptin(array $config, object $submission_data)
     {
         // Get marketing opt-in field
-        $marketing_optin = Arr::get($config, 'marketing_optin_field.0', false);
+        $marketing_optin = Arr::get($config, 'marketing_optin_field', false);
 
         // Check if marketing permission field is in submission (which indicates it's checked) or if it's not in use
-        if (request()->has($marketing_optin) || !($marketing_optin)) {
+        //if (request()->has($marketing_optin) || !($marketing_optin)) {
+        if (request()->has($marketing_optin)) {
             return true;
         }
 
