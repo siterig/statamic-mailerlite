@@ -1,4 +1,4 @@
-# Contributing to Rock & Scissor projects
+# Contributing to SiteRig projects
 We actively encourage contributing to all of our open-source projects in all of the following areas:
 
 - Reporting a bug
@@ -7,7 +7,7 @@ We actively encourage contributing to all of our open-source projects in all of 
 - Proposing new features
 
 ## We Develop with GitHub & BitBucket
-We host most of our open-source projects on GitHub although some will be on BitBucket (we use BitBucket mostly for our private commercial projects).
+We host most of our open-source and public commercial projects on GitHub although some will be on BitBucket (we use BitBucket mostly for our private commercial projects).
 
 ## We typically use [Git Feature Branch Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow) on our projects
 This means that pull requests are the best way to propose changes to the codebase. We actively welcome your pull requests:
@@ -19,16 +19,16 @@ This means that pull requests are the best way to propose changes to the codebas
 5. Make sure your code lints.
 6. Issue that pull request!
 
-## Any contributions you make will be under the MIT Software License
+## Any contributions you make will be under Proprietary commercial license
 In short, when you submit code changes, your submissions are understood to be under a Proprietary License that covers the project. Feel free to contact the maintainers if that's a concern.
 
 ## Report bugs using Github's issues
-We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/siterig/statamic-mailerlite/issues/new/choose); we already have two templates setup so its super easy, barely an inconvenience!
+We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/siterig/statamic-mailerlite/issues/new/choose); we already have two templates setup so it's super easy, barely an inconvenience!
 
 Don't forget to be thorough in your description of the bug, we love detail!
 
 ## Use a Consistent Coding Style
-* 4 spaces (PHP & Html) and 2 spaces (All other files) for indentation rather than tabs (we use a .editorconfig file for consistency)
+* 4 spaces (PHP & HTML) and 2 spaces (All other files) for indentation rather than tabs (we use a .editorconfig file for consistency)
 * Comments should match the existing format in this repo and be written in clear english with enough detail about what it's describing.
 
 ## License
