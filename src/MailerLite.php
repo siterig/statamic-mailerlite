@@ -43,7 +43,7 @@ class MailerLite
             $group = $groups_api->find($group_id);
 
             // Check if there was an error getting this group by id
-            if ($group->error) {
+            if (property_exists($group, 'error')) {
 
                 // Add error message
                 $subscriber_groups = [
