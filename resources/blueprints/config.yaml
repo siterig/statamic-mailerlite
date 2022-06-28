@@ -1,6 +1,6 @@
 api_key:
   display: 'MailerLite API Key'
-  instructions: 'Add your `MAILERLITE_API_KEY` value to your `.env` file'
+  instructions: 'Add your `MAILERLITE_API_KEY` value to your `.env` file.'
   type: text
   default: api_key
   read_only: true
@@ -17,7 +17,7 @@ forms:
       handle: form
       field:
         display: 'Form'
-        instructions: 'Select the form you wish to use'
+        instructions: 'Select the form you wish to use.'
         type: form
         max_items: 1
         mode: select
@@ -27,7 +27,7 @@ forms:
       handle: subscriber_group
       field:
         display: 'Subscriber Group'
-        instructions: 'MailerLite group to add subscribers to'
+        instructions: 'MailerLite group to add subscribers to.'
         type: subscriber_group
         mode: select
         max_items: 1
@@ -62,7 +62,7 @@ forms:
       handle: auto_split_name
       field:
         display: 'Automatically Split Name'
-        instructions: 'Split into `name` and `last_name` on <a href="https://app.mailerlite.com" target="_blank">MailerLite</a>, this setting is ignored if you map `last_name` separately'
+        instructions: 'Split into `name` and `last_name` on <a href="https://app.mailerlite.com" target="_blank">MailerLite</a>, this setting is ignored if you map `last_name` separately.'
         type: toggle
         default: true
         width: 50
@@ -101,7 +101,7 @@ forms:
             handle: mapped_form_fields
             field:
               display: 'Form Field(s)'
-              instructions: 'Select your form field name'
+              instructions: 'Select your form field name.'
               type: form_fields
               mode: select
               max_items: 1
