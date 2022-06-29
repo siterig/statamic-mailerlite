@@ -4,35 +4,29 @@
     "type": "statamic-addon",
     "require": {
         "php": "^7.4 || ^8.0",
-        "composer/composer": "^2.2",
         "edalzell/forma": "^1.2",
-        "laravel/framework": "^7.0 || ^8.0 || ^9.0",
-        "mailerlite/mailerlite-api-v2-php-sdk": "^0.3.2",
+        "laravel/framework": "^7.30.1 || ^8.6.12 || ^9.0",
+        "mailerlite/mailerlite-api-v2-php-sdk": "0.3.2",
         "statamic/cms": "^3.0"
     },
-    "description": "Subscribe contact forms emails to MailerLite",
+    "description": "Subscribe your Statamic v3 contact form submissions straight into MailerLite",
     "authors": [
         {
             "name": "Matt Stone",
             "email": "matt@rockandscissor.com",
-            "homepage": "https://rockandscissor.com",
+            "homepage": "https://www.rockandscissor.com",
             "role": "Co-founder"
         },
         {
             "name": "Craig Bowler",
             "email": "craig@rockandscissor.com",
-            "homepage": "https://rockandscissor.com",
+            "homepage": "https://www.rockandscissor.com",
             "role": "Co-founder"
         }
     ],
     "autoload": {
         "psr-4": {
             "SiteRig\\MailerLite\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "SiteRig\\MailerLite\\Tests\\": "tests"
         }
     },
     "extra": {
