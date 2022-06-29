@@ -22,6 +22,10 @@
             "email": "craig@rockandscissor.com",
             "homepage": "https://www.rockandscissor.com",
             "role": "Co-founder"
+        },
+        {
+            "name": "Jamie McGrory",
+            "role": "Consultant Developer"
         }
     ],
     "autoload": {
@@ -30,10 +34,6 @@
         }
     },
     "extra": {
-        "download-dist": {
-            "url": "https://github.com/siterig/statamic-mailerlite/releases/download/{$version}/dist.tar.gz",
-            "path": "dist"
-        },
         "statamic": {
             "name": "MailerLite",
             "description": "MailerLite addon for Statamic"
