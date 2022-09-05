@@ -11,8 +11,6 @@ class MailerLite
 {
     private $mailerlite = null;
 
-    private $form = null;
-
     private $subscriber_data = [];
 
     private $last_name_field_exists = false;
