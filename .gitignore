@@ -1,7 +1,6 @@
 /resources/dist
 /node_modules
 /vendor
-/composer.lock
 composer.lock
 mix-manifest.json
 package-lock.json
