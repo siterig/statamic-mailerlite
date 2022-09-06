@@ -2,41 +2,11 @@
 
 namespace SiteRig\MailerLite\Fieldtypes;
 
-use Statamic\Facades\Form;
-use Statamic\Fieldtypes\Relationship;
+use Statamic\Fields\Fieldtype;
 
-class FormFields extends Relationship
+class FormFields extends Fieldtype
 {
-    private $form = null;
+    protected $component = 'form_fields';
 
-    private $formHandle = 'newsletter';
-
-    protected $canCreate = false;
-
-    public function __construct()
-    {
-        $this->form = Form::find($this->formHandle);
-    }
-
-    public function getIndexItems($request)
-    {
-        $form_fields = $this->form->fields()->all();
-
-        foreach ($form_fields as $id => $field)
-        {
-
-            // Add field to array
-            $options[] = [
-                'id' => $id,
-                'title' => $id,
-            ];
-
-        }
-        return $options;
-    }
-
-    protected function toItemArray($id)
-    {
-        return [];
-    }
+    protected $icon = 'form';
 }

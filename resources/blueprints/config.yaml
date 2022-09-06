@@ -40,7 +40,7 @@ forms:
         display: 'Name Field'
         instructions: 'Select the form field to use for `name`.'
         type: form_fields
-        mode: select
+        default: name
         max_items: 1
         width: 50
         if:
@@ -51,7 +51,6 @@ forms:
         display: 'Email Field'
         instructions: 'Select the form field to use for `email`.'
         type: form_fields
-        mode: select
         default: email
         validate: required
         max_items: 1
@@ -74,7 +73,6 @@ forms:
         display: 'Opt-in Field'
         instructions: 'Should be an un-ticked checkbox that conforms to data protection regulations in your region.'
         type: form_fields
-        mode: select
         max_items: 1
         width: 50
         if:
@@ -103,7 +101,6 @@ forms:
               display: 'Form Field(s)'
               instructions: 'Select your form field name.'
               type: form_fields
-              mode: select
               max_items: 1
               width: 50
         if:
