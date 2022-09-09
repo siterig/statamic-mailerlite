@@ -40,7 +40,6 @@ forms:
         display: 'Name Field'
         instructions: 'Select the form field to use for `name`.'
         type: form_fields
-        default: name
         max_items: 1
         width: 50
         if:
@@ -51,7 +50,6 @@ forms:
         display: 'Email Field'
         instructions: 'Select the form field to use for `email`.'
         type: form_fields
-        default: email
         validate: required
         max_items: 1
         width: 50

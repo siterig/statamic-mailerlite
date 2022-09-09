@@ -4,16 +4,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2] - 2022-09-09
+
+### Added
+- More detailed installation instructions including publishing the config file as a listed setup
+- Permissions to edit config settings to be implemented in a future update
+
+### Fixed
+- Issue with config not getting registered
+
+### Removed
+- Default values on configuration form fields as they cause confusion if they aren't the field names used on a form
+
 ## [1.1.1] - 2022-09-07
 
 ### Fixed
-- Resolved missing `/resources/dist` directory issue
+- Missing `/resources/dist` directory issue
 
 ## [1.1.0] - 2022-09-06
 
 ### Added
-- Added requirement for Statamic v3.2 or higher to take advantage of the updated forms API
-- Added support for PHP 8.1
+- Requirement for Statamic v3.2 or higher to take advantage of the updated forms API
+- Support for PHP 8.1
 - Custom Vue component using v-select for picking form fields in the configuration
 
 ### Fixed

@@ -1,10 +1,12 @@
 # MailerLite for Statamic [![Latest Version](https://img.shields.io/github/release/siterig/statamic-mailerlite.svg?style=flat-square)](https://github.com/siterig/statamic-mailerlite/releases)
 
-MailerLite for Statamic lets you to subscribe contact form submissions to your MailerLite subscriber list.
+MailerLite for Statamic lets you subscribe contact form submissions to your MailerLite subscriber lists.
 
 You can optionally add subscribers to groups, automatically split single name fields into name and last name, use an opt-in field, collect GDPR compliant marketing preferences and of course map any custom fields that you like. You can also map multiple form fields into a single field on MailerLite.
 
 This is not an official add-on by MailerLite and as such support requests should be submitted [here](https://rockandscissor.atlassian.net/servicedesk/customer/portal/2) on our support centre.
+
+This addon uses [Forma](https://statamic.com/addons/silentz/forma) by Erin Dalzell and will be automatically installed for you.
 
 
 ## Documentation
@@ -27,7 +29,19 @@ You should install via the Statamic Marketplace at [https://statamic.com/addons/
   composer require siterig/mailerlite
 ```
 
-Statamic will automatically install and register the add-on.
+Set your MailerLite API key in the `env` file within your project:
+
+```
+  MAILERLITE_API_KEY=your-api-key-goes-here
+```
+
+Then all that's left to do is publish the config file to `config/mailerlite.php`:
+
+```
+  php artisan vendor:publish --tag="mailerlite-config"
+```
+
+Now you can configure your form settings within the Control Panel from the MailerLite menu option.
 
 
 ## Developers

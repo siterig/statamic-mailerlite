@@ -4,13 +4,11 @@
 
 ### Install the add-on
 
-The recommended way to install this add-on is via the Statamic Marketplace or in the Control Panel in Statamic. Alternatively you can use composer in your project root:
+You should install via the Statamic Marketplace at [https://statamic.com/addons/siterig/mailerlite](https://statamic.com/addons/siterig/mailerlite) or you can use composer in your project root:
 
 ```
   composer require siterig/mailerlite
 ```
-
-Statamic will automatically register the add-on.
 
 
 ### Add your MailerLite API key to the `.env` file
@@ -20,6 +18,16 @@ In your `.env` file add a new line with your MailerLite API key. This can be eit
 ```
   MAILERLITE_API_KEY=your-key-goes-here
 ```
+
+### Publish the configuration file
+
+Publish the config file to `config/mailerlite.php` by running the following artisan command:
+
+```
+  php artisan vendor:publish --tag="mailerlite-config"
+```
+
+Now you can configure your form settings within the Control Panel from the MailerLite menu option.
 
 
 ### Create a form in Statamic
