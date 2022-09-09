@@ -9,6 +9,7 @@ use SiteRig\MailerLite\Fieldtypes\SubscriberGroup;
 use SiteRig\MailerLite\Http\Controllers\ConfigController;
 use SiteRig\MailerLite\Listeners\FormSubmission;
 use Statamic\Events\SubmissionCreated;
+use Statamic\Facades\Permission;
 use Statamic\Providers\AddonServiceProvider;
 
 class ServiceProvider extends AddonServiceProvider
@@ -35,14 +36,32 @@ class ServiceProvider extends AddonServiceProvider
     {
         parent::boot();
 
+        $this
+            ->bootAddonConfig()
+            ->bootAddonPermissions();
+    }
+
+    protected function bootAddonConfig()
+    {
         Forma::add('siterig/mailerlite', ConfigController::class);
 
+        $this->mergeConfigFrom(__DIR__ . '/../config/mailerlite.php', 'mailerlite');
+
+        $this->publishes([
+            __DIR__ . '/../config/mailerlite.php' => config_path('mailerlite.php'),
+        ], 'mailerlite-config');
+
+        return $this;
+    }
+
+    protected function bootAddonPermissions()
+    {
         $this->app->booted(function () {
-
-            $this->publishes([
-                __DIR__ . '/../config/mailerlite.php' => config_path('mailerlite.php'),
-            ], 'config');
-
+            Permission::group('mailerlite', 'MailerLite', function () {
+                Permission::register('edit mailerlite configuration')->label(__('Edit MailerLite Configuration'));
+            });
         });
+
+        return $this;
     }
 }
