@@ -17,6 +17,6 @@ class FormSubmission
 
     private function getFormConfig(string $handle)
     {
-        return collect([config('mailerlite.forms', [])])->firstWhere('form', $handle) ?? [];
+        return collect(config('mailerlite.forms', []))->firstWhere('form', $handle) ?? [];
     }
 }
