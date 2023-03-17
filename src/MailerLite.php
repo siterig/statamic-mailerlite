@@ -25,50 +25,34 @@ class MailerLite
     /**
      * Get Subscriber Groups from MailerLite
      *
-     * @param $group_id int
+     * @param int $group_id The ID of the subscriber group if you want to return a single group
      *
      * @return array
      */
-    public function getSubscriberGroups(int $group_id = null)
+    public function getSubscriberGroups(int $group_id = null): array
     {
-        // Connect to Groups API
-        $groups_api = $this->mailerlite->groups();
+        // Connect to Groups API and get all groups
+        $groups_api = $this->mailerlite->groups()->get();
 
-        // Check if this is a request for a single group
-        if ($group_id) {
+        // Set empty subscriber groups array
+        $subscriber_groups = [];
 
-            // Get single group
-            $group = $groups_api->find($group_id);
+        // Check if there was an error getting groups
+        if (property_exists($groups_api, 'error')) {
 
-            // Check if there was an error getting this group by id
-            if (property_exists($group, 'error')) {
+            // Add error message
+            return [
+                'id' => $group_id ? $group_id : 0,
+                'title' => 'Error: Group(s) not found MailerLite',
+            ];
 
-                // Add error message
-                $subscriber_groups = [
-                    'id' => $group_id,
-                    'title' => 'Error: group no longer exists',
-                ];
+        }
 
-            } else {
-
-                // Add group to array
-                $subscriber_groups = [
-                    'id' => $group->id,
-                    'title' => $group->name,
-                ];
-
-            }
-
-        } else {
-
-            // Get all groups
-            $all_groups = $groups_api->get();
-
-            // Create new array for groups
-            $subscriber_groups = [];
+        // Check if there were any returned results
+        if (count($groups_api) > 0) {
 
             // Loop through groups and put into new array
-            foreach ($all_groups as &$group) {
+            foreach ($groups_api as &$group) {
 
                 // Add group to array
                 $subscriber_groups[] = [
@@ -78,39 +62,106 @@ class MailerLite
 
             }
 
+            // Check if this is a request for a single group
+            if ($group_id) {
+
+                // Search the returned list of groups
+                if ($key = array_search($group_id, array_column($subscriber_groups, 'id'))) {
+
+                    return [
+                        'id' => $subscriber_groups[$key]['id'],
+                        'title' => $subscriber_groups[$key]['title'],
+                    ];
+
+                }
+
+            }
+
         }
 
-        // Return the array
+        // Check if this is a request for a single group (when it doesn't exist)
+        if ($group_id) {
+
+            return [
+                'id' => $group_id,
+                'title' => 'Error: Saved group not found on MailerLite',
+            ];
+
+        }
+
+        // Return the group(s)
         return $subscriber_groups;
     }
 
     /**
      * Get Subscriber Fields from MailerLite
      *
+     * @param int $field_key The field ID
+     *
      * @return array
      */
-    public function getSubscriberFields(int $field_id = null)
+    public function getSubscriberFields(string $field_key = null): array
     {
         // Get the all subscriber fields
-        $fields_api = $this->mailerlite->fields();
-        $all_fields = $fields_api->get();
+        $fields_api = $this->mailerlite->fields()->get();
 
         // Create new array for fields
         $subscriber_fields = [];
 
-        // Loop through fields and put into new array
-        foreach ($all_fields as &$field) {
+        // Check if there was an error getting fields
+        if (property_exists($fields_api, 'error')) {
 
-            // Check this isn't the name, email or marketing_permissions field
-            if (!($field->key == 'name' || $field->key == 'email' || $field->key == 'marketing_permissions')) {
+            // Add error message
+            return [
+                'id' => $field_key ? $field_key : 0,
+                'title' => 'Error: Field(s) not found MailerLite',
+            ];
 
-                // Add field to array
-                $subscriber_fields[] = [
-                    'id' => $field->key,
-                    'title' => $field->title
-                ];
+        }
+
+        // Check if there were any returned results
+        if (count($fields_api) > 0) {
+
+            // Loop through fields and put into new array
+            foreach ($fields_api as &$field) {
+
+                // Check this isn't the name, email or marketing_permissions field
+                if (!($field->key == 'name' || $field->key == 'email' || $field->key == 'marketing_permissions')) {
+
+                    // Add field to array
+                    $subscriber_fields[] = [
+                        'id' => $field->key,
+                        'title' => $field->title
+                    ];
+
+                }
 
             }
+
+            // Check if this is a request for a single field
+            if ($field_key) {
+
+                // Search the returned list of fields
+                if ($key = array_search($field_key, array_column($subscriber_fields, 'key'))) {
+
+                    return [
+                        'id' => $subscriber_fields[$key]['key'],
+                        'title' => $subscriber_fields[$key]['title'],
+                    ];
+
+                }
+
+            }
+
+        }
+
+        // Check if this is a request for a single group (when it doesn't exist)
+        if ($field_key) {
+
+            return [
+                'id' => $field_key,
+                'title' => 'Error: Saved field not found on MailerLite',
+            ];
 
         }
 
@@ -121,12 +172,12 @@ class MailerLite
     /**
      * Add Subscriber to MailerLite
      *
-     * @param $config array
-     * @param $submission array
+     * @param array $config         The form configuration data
+     * @param object $submission    The form submission object
      *
      * @return array
      */
-    public function addSubscriber(array $config, object $submission_data)
+    public function addSubscriber(array $config, object $submission_data): array
     {
         // Check if marketing permissions were accepted (returns true if not in use)
         if ($this->checkMarketingOptin($config, $submission_data)) {
@@ -216,7 +267,7 @@ class MailerLite
      *
      * @return bool
      */
-    private function checkMarketingOptin(array $config, object $submission_data)
+    private function checkMarketingOptin(array $config, object $submission_data): bool
     {
         // Get marketing opt-in field
         $marketing_optin = Arr::get($config, 'marketing_optin_field', false);
