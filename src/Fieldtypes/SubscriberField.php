@@ -23,6 +23,10 @@ class SubscriberField extends Relationship
 
     protected function toItemArray($id)
     {
+        if ($id && $subscriber_field = $this->mailerlite->getSubscriberFields($id)) {
+            return $subscriber_field;
+        }
+
         return[];
     }
 }
