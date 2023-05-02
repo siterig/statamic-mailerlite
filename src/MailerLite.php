@@ -222,7 +222,7 @@ class MailerLite
         $marketing_optin = Arr::get($config, 'marketing_optin_field', false);
 
         // Check if marketing permission field is in submission (which indicates it's checked) or if it's not in use
-        if (request()->has($marketing_optin) || !($marketing_optin)) {
+        if ($submission_data->has($marketing_optin) || !($marketing_optin)) {
             return true;
         }
 
