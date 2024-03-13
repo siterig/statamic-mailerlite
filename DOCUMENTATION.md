@@ -13,7 +13,7 @@ You should install via the Statamic Marketplace at [https://statamic.com/addons/
 
 ### Add your MailerLite API key to the `.env` file
 
-In your `.env` file add a new line with your MailerLite API key. This can be either a MailerLite Classic or MailerLite New key.
+In your `.env` file add a new line with your MailerLite API key. This add-on only works with the new MailerLite. MailerLite Classic is no longer supported.
 
 ```
   MAILERLITE_API_KEY=your-key-goes-here
