@@ -3,7 +3,8 @@
 namespace SiteRig\MailerLite;
 
 use Illuminate\Support\Facades\Log;
-use MailerLiteApi\MailerLite as MailerLiteAPI;
+use MailerLite\MailerLite as MailerLiteApi;
+use MailerLite\Exceptions\MailerLiteHttpException as MailerLiteApiHttpException;
 use Statamic\Facades\Blueprint;
 use Statamic\Support\Arr;
 
@@ -18,7 +19,7 @@ class MailerLite
     public function __construct()
     {
         if ($api_key = config('mailerlite.api_key')) {
-            $this->mailerlite = new MailerLiteAPI($api_key);
+            $this->mailerlite = new MailerLiteApi(['api_key' => $api_key]);
         }
     }
 
@@ -32,29 +33,30 @@ class MailerLite
     public function getSubscriberGroups(int $group_id = null)
     {
         // Connect to Groups API
-        $groups_api = $this->mailerlite->groups();
+        $groups_api = $this->mailerlite->groups;
 
         // Check if this is a request for a single group
         if ($group_id) {
 
-            // Get single group
-            $group = $groups_api->find($group_id);
+            // Try catch exception on groups api request
+            try {
 
-            // Check if there was an error getting this group by id
-            if (property_exists($group, 'error')) {
+                // Get single group
+                $group_response = $groups_api->find($group_id);
+                $group = $group_response['body']['data']; ray($group);
+
+                // Add group to array
+                $subscriber_groups = [
+                    'id' => $group['id'],
+                    'title' => $group['name'],
+                ];
+
+            } catch (MailerLiteApiHttpException $exception) {
 
                 // Add error message
                 $subscriber_groups = [
                     'id' => $group_id,
                     'title' => 'Error: group no longer exists',
-                ];
-
-            } else {
-
-                // Add group to array
-                $subscriber_groups = [
-                    'id' => $group->id,
-                    'title' => $group->name,
                 ];
 
             }
@@ -68,12 +70,12 @@ class MailerLite
             $subscriber_groups = [];
 
             // Loop through groups and put into new array
-            foreach ($all_groups as &$group) {
+            foreach ($all_groups['body']['data'] as &$group) {
 
                 // Add group to array
                 $subscriber_groups[] = [
-                    'id' => $group->id,
-                    'title' => $group->name,
+                    'id' => $group['id'],
+                    'title' => $group['name'],
                 ];
 
             }
@@ -92,27 +94,36 @@ class MailerLite
     public function getSubscriberFields(int $field_id = null)
     {
         // Get the all subscriber fields
-        $fields_api = $this->mailerlite->fields();
+        $fields_api = $this->mailerlite->fields;
         $all_fields = $fields_api->get();
 
         // Create new array for fields
         $subscriber_fields = [];
 
         // Loop through fields and put into new array
-        foreach ($all_fields as &$field) {
+        foreach ($all_fields['body']['data'] as &$field) {
 
             // Check this isn't the name, email or marketing_permissions field
-            if (!($field->key == 'name' || $field->key == 'email' || $field->key == 'marketing_permissions')) {
+            if (!($field['key'] == 'name')) {
 
                 // Add field to array
                 $subscriber_fields[] = [
-                    'id' => $field->key,
-                    'title' => $field->title
+                    'id' => $field['key'],
+                    'title' => $field['name']
                 ];
 
             }
 
         }
+
+        // Extract the field names to a separate array for sorting
+        $field_names = array_column($subscriber_fields, 'title');
+
+        // Sort the array of field names
+        array_multisort($field_names, SORT_ASC, $subscriber_fields);
+
+        // Re-index the array to maintain the relationship between id and title
+        $subscriber_fields = array_values($subscriber_fields); ray($subscriber_fields);
 
         // Return the array
         return $subscriber_fields;
@@ -178,7 +189,7 @@ class MailerLite
             if (isset($config['subscriber_group'])) {
 
                 // Use the MailerLite Groups API to add the subscriber to a group
-                $response = $this->mailerlite->groups()->addSubscriber($config['subscriber_group'], $this->subscriber_data, $subscriber_options);
+                $response = $this->mailerlite->groups->addSubscriber($config['subscriber_group'], $this->subscriber_data, $subscriber_options);
 
             } else {
 
