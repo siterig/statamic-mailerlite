@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.0.0] - 2024-03-15
 
 ### Changed
-- Updated minimum requirements to PHP 8.2, Laravel 9 and Statamic 4.0
+- Updated minimum requirements to PHP 8.2, Laravel 10/11 and Statamic 4.0/5.0
 
 ## [1.1.5] - 2023-05-02
 

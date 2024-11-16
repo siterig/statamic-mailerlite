@@ -17,9 +17,9 @@ Read it on the [Statamic Marketplace](https://statamic.com/addons/siterig/mailer
 ## Requirements
 
 * PHP 8.2 or higher
-* Laravel 9 or 10
+* Laravel 10 or 11
 * Statamic v4.0 or higher
-* MailerLite New API Key (not compatible with MailerLite Classic)
+* MailerLite New API Key (no longer compatible with MailerLite Classic)
 
 
 ## Installation
