@@ -4,10 +4,10 @@
     "type": "statamic-addon",
     "require": {
         "php": "^8.2",
-        "edalzell/forma": "^3.0",
-        "laravel/framework": "^10.0 || ^11.0",
+        "edalzell/forma": "3.1.1",
+        "laravel/framework": "^10.0 || ^11.0 || ^12.0",
         "statamic/cms": "^4.0 || ^5.0",
-        "mailerlite/mailerlite-php": "^1.0.3"
+        "mailerlite/mailerlite-php": "1.0.4"
     },
     "description": "Subscribe your Statamic v5 contact form submissions straight into MailerLite",
     "authors": [
